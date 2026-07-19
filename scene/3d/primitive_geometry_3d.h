@@ -101,7 +101,6 @@ private:
 #ifndef PHYSICS_3D_DISABLED
 	virtual void instantiate_collision_shape() = 0;
 #endif
-
 };
 
 // All the primitive geometries
@@ -124,7 +123,7 @@ public:
 	void set_size(const Vector3 &p_size);
 	Vector3 get_size() const;
 
-	Box3D() {};
+	Box3D() {}
 };
 
 class Sphere3D : public PrimitiveGeometry3D {
@@ -145,7 +144,7 @@ public:
 	void set_radius(const float p_radius);
 	float get_radius() const;
 
-	Sphere3D() {};
+	Sphere3D() {}
 };
 
 class Cylinder3D : public PrimitiveGeometry3D {
@@ -169,7 +168,7 @@ public:
 	void set_height(const float p_height);
 	float get_height() const;
 
-	Cylinder3D() {};
+	Cylinder3D() {}
 };
 
 class Capsule3D : public PrimitiveGeometry3D {
@@ -193,5 +192,5 @@ public:
 	void set_height(const float p_height);
 	float get_height() const;
 
-	Capsule3D() {};
+	Capsule3D() {}
 };

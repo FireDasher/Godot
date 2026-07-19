@@ -5,7 +5,7 @@
 	</brief_description>
 	<description>
 		This is the base class for primitive geometry shapes.
-		Each shape has paramaters such as size, radius, or height, which can be adjusted to change the proportions of the shape. They can also be translated and rotated.
+		Each shape has parameters such as size, radius, or height, which can be adjusted to change the proportions of the shape. They can also be translated and rotated.
 		[b]Performance:[/b] Primitive Geometry nodes are intended both for fast level prototyping as well as finished games, as they have a cheap CPU cost due to using primitive meshes and collision.
 	</description>
 	<tutorials>

@@ -29,6 +29,7 @@
 /**************************************************************************/
 
 #include "primitive_geometry_3d.h"
+
 #include "core/math/aabb.h"
 #include "core/math/triangle_mesh.h"
 #include "core/object/class_db.h"
@@ -47,10 +48,10 @@ void PrimitiveGeometry3D::set_material(const Ref<Material> &p_material) {
 	if (mesh.is_valid()) {
 		mesh->set_material(material);
 	}
-};
+}
 Ref<Material> PrimitiveGeometry3D::get_material() const {
 	return material;
-};
+}
 
 Ref<TriangleMesh> PrimitiveGeometry3D::generate_triangle_mesh() const {
 	return mesh->generate_triangle_mesh();
@@ -76,7 +77,6 @@ void PrimitiveGeometry3D::destroy_collision() {
 	collision_body = RID();
 	shape = nullptr;
 }
-
 
 void PrimitiveGeometry3D::set_use_collision(bool p_enable) {
 	if (use_collision == p_enable) {
@@ -204,7 +204,7 @@ void PrimitiveGeometry3D::_notification(int p_what) {
 		} break;
 #endif
 	}
-};
+}
 
 void PrimitiveGeometry3D::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("set_material", "material"), &Box3D::set_material);
@@ -280,7 +280,7 @@ void Box3D::instantiate_collision_shape() {
 	Ref<BoxShape3D> box_shape = memnew(BoxShape3D);
 	box_shape->set_size(size);
 	shape = box_shape;
-};
+}
 #endif
 
 void Box3D::_bind_methods() {
@@ -290,13 +290,12 @@ void Box3D::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::VECTOR3, "size", PROPERTY_HINT_NONE, "suffix:m"), "set_size", "get_size");
 }
 
-
 void Sphere3D::set_radius(const float p_radius) {
 	ERR_FAIL_COND_MSG(p_radius < 0.f, "Sphere3D radius cannot be negative.");
 	radius = p_radius;
 	if (mesh.is_valid()) {
 		((Ref<SphereMesh>)mesh)->set_radius(p_radius);
-		((Ref<SphereMesh>)mesh)->set_height(p_radius*2.f);
+		((Ref<SphereMesh>)mesh)->set_height(p_radius * 2.f);
 	}
 #ifndef PHYSICS_3D_DISABLED
 	if (shape.is_valid()) {
@@ -313,7 +312,7 @@ float Sphere3D::get_radius() const {
 void Sphere3D::instantiate_mesh() {
 	Ref<SphereMesh> sphere_mesh = memnew(SphereMesh);
 	sphere_mesh->set_radius(radius);
-	sphere_mesh->set_height(radius*2.f);
+	sphere_mesh->set_height(radius * 2.f);
 	sphere_mesh->set_material(material);
 	set_base(sphere_mesh->get_rid());
 	mesh = sphere_mesh;
@@ -324,7 +323,7 @@ void Sphere3D::instantiate_collision_shape() {
 	Ref<SphereShape3D> sphere_shape = memnew(SphereShape3D);
 	sphere_shape->set_radius(radius);
 	shape = sphere_shape;
-};
+}
 #endif
 
 void Sphere3D::_bind_methods() {
@@ -333,7 +332,6 @@ void Sphere3D::_bind_methods() {
 
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "radius", PROPERTY_HINT_NONE, "suffix:m"), "set_radius", "get_radius");
 }
-
 
 void Cylinder3D::set_radius(const float p_radius) {
 	ERR_FAIL_COND_MSG(p_radius < 0.f, "Cylinder3D radius cannot be negative.");
@@ -388,7 +386,7 @@ void Cylinder3D::instantiate_collision_shape() {
 	cylinder_shape->set_radius(radius);
 	cylinder_shape->set_height(height);
 	shape = cylinder_shape;
-};
+}
 #endif
 
 void Cylinder3D::_bind_methods() {
@@ -400,7 +398,6 @@ void Cylinder3D::_bind_methods() {
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "radius", PROPERTY_HINT_NONE, "suffix:m"), "set_radius", "get_radius");
 	ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "height", PROPERTY_HINT_NONE, "suffix:m"), "set_height", "get_height");
 }
-
 
 void Capsule3D::set_radius(const float p_radius) {
 	ERR_FAIL_COND_MSG(p_radius < 0.f, "Capsule3D radius cannot be negative.");
@@ -453,7 +450,7 @@ void Capsule3D::instantiate_collision_shape() {
 	capsule_shape->set_radius(radius);
 	capsule_shape->set_height(height);
 	shape = capsule_shape;
-};
+}
 #endif
 
 void Capsule3D::_bind_methods() {

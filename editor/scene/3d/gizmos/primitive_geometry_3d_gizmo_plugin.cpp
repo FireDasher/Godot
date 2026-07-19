@@ -57,7 +57,6 @@ int PrimitiveGeometry3DGizmoPlugin::get_priority() const {
 String PrimitiveGeometry3DGizmoPlugin::get_handle_name(const EditorNode3DGizmo *p_gizmo, int p_id, bool p_secondary) const {
 	const PrimitiveGeometry3D *cs = Object::cast_to<PrimitiveGeometry3D>(p_gizmo->get_node_3d());
 
-
 	if (Object::cast_to<Sphere3D>(cs)) {
 		return "Radius";
 	}
@@ -81,22 +80,22 @@ Variant PrimitiveGeometry3DGizmoPlugin::get_handle_value(const EditorNode3DGizmo
 	PrimitiveGeometry3D *cs = Object::cast_to<PrimitiveGeometry3D>(p_gizmo->get_node_3d());
 
 	if (Object::cast_to<Sphere3D>(cs)) {
-		Sphere3D* ss = (Sphere3D*)cs;
+		Sphere3D *ss = (Sphere3D *)cs;
 		return ss->get_radius();
 	}
 
 	if (Object::cast_to<Box3D>(cs)) {
-		Box3D* ss = (Box3D*)cs;
+		Box3D *ss = (Box3D *)cs;
 		return ss->get_size();
 	}
 
 	if (Object::cast_to<Capsule3D>(cs)) {
-		Capsule3D* ss = (Capsule3D*)cs;
+		Capsule3D *ss = (Capsule3D *)cs;
 		return Vector2(ss->get_radius(), ss->get_height());
 	}
 
 	if (Object::cast_to<Cylinder3D>(cs)) {
-		Cylinder3D* ss = (Cylinder3D*)cs;
+		Cylinder3D *ss = (Cylinder3D *)cs;
 		return Vector2(ss->get_radius(), ss->get_height());
 	}
 
@@ -114,7 +113,7 @@ void PrimitiveGeometry3DGizmoPlugin::set_handle(const EditorNode3DGizmo *p_gizmo
 	helper->get_segment(p_camera, p_point, sg);
 
 	if (Object::cast_to<Sphere3D>(cs)) {
-		Sphere3D* ss = (Sphere3D*)cs;
+		Sphere3D *ss = (Sphere3D *)cs;
 		Vector3 ra, rb;
 		Geometry3D::get_closest_points_between_segments(Vector3(), Vector3(4096, 0, 0), sg[0], sg[1], ra, rb);
 		float d = ra.x;
@@ -130,7 +129,7 @@ void PrimitiveGeometry3DGizmoPlugin::set_handle(const EditorNode3DGizmo *p_gizmo
 	}
 
 	if (Object::cast_to<Box3D>(cs)) {
-		Box3D* bs = (Box3D*)cs;
+		Box3D *bs = (Box3D *)cs;
 		Vector3 size = bs->get_size();
 		Vector3 position;
 		helper->box_set_handle(sg, p_id, size, position);
@@ -139,7 +138,7 @@ void PrimitiveGeometry3DGizmoPlugin::set_handle(const EditorNode3DGizmo *p_gizmo
 	}
 
 	if (Object::cast_to<Capsule3D>(cs)) {
-		Capsule3D* cs2 = (Capsule3D*)cs;
+		Capsule3D *cs2 = (Capsule3D *)cs;
 
 		real_t height = cs2->get_height();
 		real_t radius = cs2->get_radius();
@@ -151,7 +150,7 @@ void PrimitiveGeometry3DGizmoPlugin::set_handle(const EditorNode3DGizmo *p_gizmo
 	}
 
 	if (Object::cast_to<Cylinder3D>(cs)) {
-		Cylinder3D* cs2 = (Cylinder3D*)cs;
+		Cylinder3D *cs2 = (Cylinder3D *)cs;
 
 		real_t height = cs2->get_height();
 		real_t radius = cs2->get_radius();
@@ -168,7 +167,7 @@ void PrimitiveGeometry3DGizmoPlugin::commit_handle(const EditorNode3DGizmo *p_gi
 
 	// there's no helper->commit_sphere_handle so manual implementation
 	if (Object::cast_to<Sphere3D>(cs)) {
-		Sphere3D* ss = (Sphere3D*)cs;
+		Sphere3D *ss = (Sphere3D *)cs;
 		if (p_cancel) {
 			ss->set_radius(p_restore);
 			return;
@@ -202,7 +201,7 @@ void PrimitiveGeometry3DGizmoPlugin::redraw(EditorNode3DGizmo *p_gizmo) {
 	const Ref<Material> handles_material = get_material("handles");
 
 	if (Object::cast_to<Sphere3D>(cs)) {
-		Sphere3D* sp = (Sphere3D*)cs;
+		Sphere3D *sp = (Sphere3D *)cs;
 
 		Vector<Vector3> handles;
 		handles.push_back(Vector3(sp->get_radius(), 0.f, 0.f));
@@ -210,21 +209,21 @@ void PrimitiveGeometry3DGizmoPlugin::redraw(EditorNode3DGizmo *p_gizmo) {
 	}
 
 	if (Object::cast_to<Box3D>(cs)) {
-		Box3D* bs = (Box3D*)cs;
+		Box3D *bs = (Box3D *)cs;
 
 		const Vector<Vector3> handles = helper->box_get_handles(bs->get_size());
 		p_gizmo->add_handles(handles, handles_material);
 	}
 
 	if (Object::cast_to<Capsule3D>(cs)) {
-		Capsule3D* cs2 = (Capsule3D*)cs;
+		Capsule3D *cs2 = (Capsule3D *)cs;
 
 		Vector<Vector3> handles = helper->capsule_get_handles(cs2->get_height(), cs2->get_radius());
 		p_gizmo->add_handles(handles, handles_material);
 	}
 
 	if (Object::cast_to<Cylinder3D>(cs)) {
-		Cylinder3D* cs2 = (Cylinder3D*)cs;
+		Cylinder3D *cs2 = (Cylinder3D *)cs;
 
 		Vector<Vector3> handles = helper->cylinder_get_handles(cs2->get_height(), cs2->get_radius());
 		p_gizmo->add_handles(handles, handles_material);
